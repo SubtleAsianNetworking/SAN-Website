@@ -5,7 +5,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const PORT = 4000;
 
-const eventRoutes = require('./routes/events')
+const eventRoutes = require('./routes/events.route')
 
 app.use(cors());
 
