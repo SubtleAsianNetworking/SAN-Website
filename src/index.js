@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Initial from './front/pages/Initial';
+import Initial from './pages/Initial';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<Initial />, document.getElementById('root'));
