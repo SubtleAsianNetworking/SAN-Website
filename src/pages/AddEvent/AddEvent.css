@@ -216,3 +216,7 @@
   .rdtTime td {
     cursor: default;
   }
+
+  .error {
+    color: red;
+  }
