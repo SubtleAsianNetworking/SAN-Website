@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import DateTime from 'react-datetime';
+
 import './AddEvent.css';
 
 export default class AddEvent extends React.Component {
@@ -7,19 +9,23 @@ export default class AddEvent extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onChangeDateTime = this.onChangeDateTime.bind(this);
+    this.onChangeTime = this.onChangeTime.bind(this);
     this.onChangeLocation = this.onChangeLocation.bind(this);
+    this.onChangeTopic = this.onChangeTopic.bind(this);
+    this.onChangeAffliation = this.onChangeAffliation.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-        datetime: '',
+        time: new Date(),
         location: '',
+        topic: '',
+        affliation: '',
     }
   }
   
-  onChangeDateTime(e) {
+  onChangeTime(e) {
     this.setState({
-        datetime: e.target.value
+        time: e
     });
   }
 
@@ -29,21 +35,39 @@ export default class AddEvent extends React.Component {
     });
   }
 
+  onChangeTopic(e) {
+    this.setState({
+        topic: e.target.value
+    });
+  }
+
+  onChangeAffliation(e) {
+    this.setState({
+        affliation: e.target.value
+    });
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
+    console.log(this.state.time);
+
     const newEvent = {
-        datetime: this.state.datetime,
+        time: this.state.time,
         location: this.state.location,
+        topic: this.state.topic,
+        affliation: this.state.affliation,
+        approved: false,
     }
-    console.log(newEvent);
 
     axios.post('http://localhost:4000/events/add', newEvent)
         .then(res => console.log(res.data));
 
     this.setState({
-        datetime: '',
+        time: new Date(),
         location: '',
+        topic: '',
+        affliation: '',
     });
 
     this.props.history.push('/events');
@@ -58,21 +82,38 @@ export default class AddEvent extends React.Component {
           <h3>Add an Event</h3>
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
-                <label>Datetime: </label>
-                <input  type="text"
-                        className="form-control"
-                        value={this.state.datetime}
-                        onChange={this.onChangeDateTime}
-                        />
+                <label>Time: </label>
+                <DateTime value = {this.state.time}
+                          onChange = {this.onChangeTime}/>
             </div>
+            
             <div className="form-group">
-                <label>Description: </label>
+                <label>Location: </label>
                 <input  type="text"
                         className="form-control"
-                        value={this.state.description}
+                        value={this.state.location}
                         onChange={this.onChangeLocation}
                         />
             </div>
+            
+            <div className="form-group">
+                <label>Topic: </label>
+                <input  type="text"
+                        className="form-control"
+                        value={this.state.topic}
+                        onChange={this.onChangeTopic}
+                        />
+            </div>
+
+            <div className="form-group">
+                <label>Affliation: </label>
+                <input  type="text"
+                        className="form-control"
+                        value={this.state.affliation}
+                        onChange={this.onChangeAffliation}
+                        />
+            </div>
+
             <div className="form-group">
                 <input type="submit" value="Create New Event" className="btn btn-primary" />
             </div>

@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Event = props => (
     <tr>
-        <td>{props.event.datetime}</td>
+        <td>{props.event.date}</td>
+        <td>{props.event.time}</td>
         <td>{props.event.location}</td>
+        <td>{props.event.topic}</td>
+        <td>{props.event.affliation}</td>
     </tr>
 )
 
@@ -28,6 +30,9 @@ export default class GetEvents extends Component {
 
     getEventList() {
         return this.state.events.map(function(currEvent, i) {
+            const time = new Date (currEvent.time);
+            currEvent.date = time.toDateString();
+            currEvent.time = time.toLocaleTimeString().replace(/:\d+ /, ' ');
             return <Event event={currEvent} key={i} />;
         });
     }
@@ -39,8 +44,11 @@ export default class GetEvents extends Component {
                 <table className="table table-striped" style={{ marginTop: 20 }}>
                     <thead>
                         <tr>
-                            <th>Date/Time</th>
+                            <th>Date</th>
+                            <th>Time</th>
                             <th>Location</th>
+                            <th>Topic</th>
+                            <th>Affliation</th>
                         </tr>
                     </thead>
                     <tbody>

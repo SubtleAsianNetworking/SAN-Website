@@ -10,8 +10,10 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
     "cors": "^2.8.5",
+    "moment": "^2.24.0",
     "mongoose": "^5.9.2",
     "react": "^16.12.0",
+    "react-datetime": "^2.16.3",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0"
