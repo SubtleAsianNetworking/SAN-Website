@@ -72,7 +72,7 @@ export default class AddEvent extends React.Component {
     return {
       valid: errors.length === 0,
       errors,
-  };
+    };
   }
 
   render() {
@@ -97,7 +97,12 @@ export default class AddEvent extends React.Component {
                                 ...this.state.formData,
                                 time: entry || null
                             }
-                        })}/>
+                        })}
+                        isValidDate = {(curr) =>{
+                          var yesterday = moment().subtract(1, 'day' );
+                          return curr.isAfter(yesterday );
+                        }}
+                        />
             </div>
             
             <div className="form-group" id="location">

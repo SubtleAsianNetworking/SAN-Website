@@ -21,7 +21,7 @@ export default class GetEvents extends Component {
     componentDidMount() {
         axios.get('http://localhost:4000/events/')
             .then(response => {
-                this.setState({events: response.data});
+                this.setState({events: response.data.data})
             })
             .catch(function (error) {
                 console.log(error);
